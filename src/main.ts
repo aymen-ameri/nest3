@@ -5,8 +5,10 @@ import * as Consul from 'consul';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Register your service with Consul
-  const consul = new Consul();
+  // Specify the host for Consul agent
+  const consulHost = 'consul'; // Replace with the Consul agent's host address
+  const consul = new Consul({ host: consulHost });
+
   const serviceName = 'nest'; // Replace with your service name
   const servicePort = 3002; // Replace with your service's port
 
@@ -25,4 +27,5 @@ async function bootstrap() {
 
   await app.listen(servicePort);
 }
+
 bootstrap();
