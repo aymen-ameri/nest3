@@ -5,13 +5,14 @@ import * as Consul from 'consul';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Specify the host for Consul agent
+  // Specify the host and port for Consul agent
   const consulHost = 'consul'; // Replace with the Consul agent's host address
-  const consul = new Consul({ host: consulHost });
+  const consulPort = 8500; // Replace with the desired Consul agent's port number
+  const consul = new Consul({ host: consulHost, port: consulPort });
 
   const serviceName = 'NEST-SERVICE'; // Replace with your service name
   const servicePort = 3002; // Replace with your service's port
-  const serviceId = 'NEST-SERVICE'; // Re
+  const serviceId = 'NEST-SERVICE'; // Replace with a unique service ID
 
   const details = {
     id: serviceId,
