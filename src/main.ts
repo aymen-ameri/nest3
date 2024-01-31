@@ -9,9 +9,9 @@ async function bootstrap() {
   const consulHost = 'consul'; // Replace with the Consul agent's host address
   const consul = new Consul({ host: consulHost });
 
-  const serviceName = 'nest'; // Replace with your service name
+  const serviceName = 'NEST-SERVICE'; // Replace with your service name
   const servicePort = 3002; // Replace with your service's port
-  const serviceId = 'unique-service-id'; // Replace with a unique ID for your service
+  const serviceId = 'NEST-SERVICE'; // Re
 
   const details = {
     id: serviceId,
