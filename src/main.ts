@@ -9,9 +9,9 @@ async function bootstrap() {
   const consulHost = 'consul'; // Replace with the Consul agent's host address
   const consul = new Consul({ host: consulHost });
 
-  const serviceName = 'NEST-SERVICE'; // Replace with your service name
+  const serviceName = 'nest'; // Replace with your service name
   const servicePort = 3002; // Replace with your service's port
-  const serviceId = 'NEST-SERVICE'; // Replace with a unique ID for your service
+  const serviceId = 'unique-service-id'; // Replace with a unique ID for your service
 
   const details = {
     id: serviceId,
@@ -25,6 +25,18 @@ async function bootstrap() {
     } else {
       console.log(`Registered with Consul as ${serviceName} (ID: ${serviceId})`);
     }
+  });
+
+  // Listen for the 'exit' event
+  process.on('exit', () => {
+    // Deregister the service from Consul when the application exits
+    consul.agent.service.deregister(serviceId, (err) => {
+      if (err) {
+        console.error('Error deregistering from Consul:', err);
+      } else {
+        console.log(`Deregistered from Consul (ID: ${serviceId})`);
+      }
+    });
   });
 
   await app.listen(servicePort);
