@@ -3,7 +3,6 @@ import { AppModule } from './app.module';
 import * as Consul from 'consul';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule, { cors: true });
 
   const app = await NestFactory.create(AppModule);
 
@@ -19,6 +18,7 @@ async function bootstrap() {
     id: serviceId,
     name: serviceName,
     port: servicePort,
+    address: 'nest'
   };
 
   consul.agent.service.register(details, (err) => {
