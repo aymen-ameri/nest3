@@ -3,9 +3,10 @@ import { AppModule } from './app.module';
 import * as Consul from 'consul';
 
 async function bootstrap() {
+    const app = await NestFactory.create(AppModule, { cors: true });
+
   const app = await NestFactory.create(AppModule);
 
-  // Specify the host and port for Consul agent
   const consulHost = 'consul'; // Replace with the Consul agent's host address
   const consulPort = 8500; // Replace with the desired Consul agent's port number
   const consul = new Consul({ host: consulHost, port: consulPort });
