@@ -1,23 +1,20 @@
-# Step 1: Use an official Node.js runtime as a parent image
+# Use the official Node.js image as base
 FROM node:16
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json (or yarn.lock if using yarn)
+# Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Bundle app source
+# Copy the rest of the application code
 COPY . .
 
-# Build the application
-RUN npm run build
-
-# Your app binds to port 3000, so use the EXPOSE instruction to have it mapped
+# Expose the port that the app runs on
 EXPOSE 3002
 
-# Define the command to run your app
-CMD [ "node", "dist/main" ]
+# Command to run the application
+CMD ["npm", "run", "start:dev"]
