@@ -4,6 +4,9 @@ FROM node:16
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
+# Install NestJS CLI globally
+RUN npm install -g @nestjs/cli
+
 # Copy package.json and package-lock.json (if available) to the container
 COPY package*.json ./
 
